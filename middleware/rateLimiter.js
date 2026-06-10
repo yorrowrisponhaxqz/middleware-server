@@ -12,7 +12,7 @@ function generalLimiter(ip) {
 		skip: (req) => req.headers["x-secret-header"] === secretHeader,
 	});
 }
-
+ 
 module.exports = {
     generalLimiter,
 };
