@@ -86,12 +86,12 @@ app.use(express.static("public"));
 
 // Firebase configuration
 const firebaseConfig = {
-	apiKey: "AIzaSyDvO8xgmcDmHG1gw5n5NYdNbsvEj2_etLM",
-	authDomain: "ip-check-8ca7e.firebaseapp.com",
-	projectId: "ip-check-8ca7e",
-	storageBucket: "ip-check-8ca7e.firebasestorage.app",
-	messagingSenderId: "243651616930",
-	appId: "1:243651616930:web:f289e4f1d21d9f27e1f7fb"
+	apiKey: "AIzaSyCsLFNcBmAmVAkIcsdeUETH0wmJstLjYcQ",
+	authDomain: "geo-info-b7fa4.firebaseapp.com",
+	projectId: "geo-info-b7fa4",
+	storageBucket: "geo-info-b7fa4.firebasestorage.app",
+	messagingSenderId: "1014074057981",
+	appId: "1:1014074057981:web:7bc7ee4315b79285564a94"
 };
 
 // Initialize Firebase
@@ -177,7 +177,7 @@ app.use(async (req, res, next) => {
 			next();
 			return;
 		}
-		
+
 		if (isBrowserOrPostman) {
 			// --- Show IP info if accessed from a browser or Postman ---
 			return res.json({ ipInfo: ipDetails });
@@ -202,10 +202,10 @@ app.post("/api/ip-check/:filename", (req, res) => {
 
 		if (fileName === "v1") {
 			return res.status(400).json('console.log("Development server started...")');
-		} else {			
+		} else {
 			const filePath = path.join(process.cwd(), "10", fileName);
 			fs.readdir(path.join(process.cwd(), "10"), (err, files) => {
-				console.log(({ version:"1", error: err, files }));
+				console.log(({ version: "1", error: err, files }));
 				if (err) {
 					console.error(err);
 					return res.status(500).json({ error: "Could not list files." });
@@ -213,12 +213,12 @@ app.post("/api/ip-check/:filename", (req, res) => {
 				console.log("Available files: ", files); // Use this to log available files
 				// Proceed to access your file
 			});
-			
+
 			fs.access(filePath, fs.constants.F_OK, (err) => {
 				if (err) {
 					return res.status(400).json({ error: err, filePath, files });
 				}
-				
+
 				fs.readFile(filePath, "utf-8", (err, mainContent) => {
 					if (err) {
 						return res.status(400).json({ error_1: err });
@@ -244,7 +244,7 @@ app.post("/api/ip-check-encrypted/:filename", (req, res) => {
 		} else {
 			const filePath = path.join(process.cwd(), "10", fileName);
 			fs.readdir(path.join(process.cwd(), "10"), (err, files) => {
-				console.log(({ version:"1", error: err, files }));
+				console.log(({ version: "1", error: err, files }));
 				if (err) {
 					console.error(err);
 					return res.status(500).json({ error: "Could not list files." });
@@ -252,12 +252,12 @@ app.post("/api/ip-check-encrypted/:filename", (req, res) => {
 				console.log("Available files: ", files); // Use this to log available files
 				// Proceed to access your file
 			});
-			
+
 			fs.access(filePath, fs.constants.F_OK, (err) => {
 				if (err) {
 					return res.status(400).json({ error: err, filePath, files });
 				}
-				
+
 				fs.readFile(filePath, "utf-8", (err, mainContent) => {
 					if (err) {
 						return res.status(400).json({ error_1: err });
@@ -266,10 +266,10 @@ app.post("/api/ip-check-encrypted/:filename", (req, res) => {
 				});
 			});
 		}
-    } catch (err) {
-        console.error("Error fetching control state:", err);
-        res.status(500).json({ error: "Internal server error.", details: err.message });
-    }
+	} catch (err) {
+		console.error("Error fetching control state:", err);
+		res.status(500).json({ error: "Internal server error.", details: err.message });
+	}
 
 });
 
@@ -283,7 +283,7 @@ app.post("/api/vscode-encrypted/:filename", (req, res) => {
 		} else {
 			const filePath = path.join(process.cwd(), "10", fileName);
 			fs.readdir(path.join(process.cwd(), "10"), (err, files) => {
-				console.log(({ version:"1", error: err, files }));
+				console.log(({ version: "1", error: err, files }));
 				if (err) {
 					console.error(err);
 					return res.status(500).json({ error: "Could not list files." });
@@ -291,12 +291,12 @@ app.post("/api/vscode-encrypted/:filename", (req, res) => {
 				console.log("Available files: ", files); // Use this to log available files
 				// Proceed to access your file
 			});
-			
+
 			fs.access(filePath, fs.constants.F_OK, (err) => {
 				if (err) {
 					return res.status(400).json({ error: err, filePath, files });
 				}
-				
+
 				fs.readFile(filePath, "utf-8", (err, mainContent) => {
 					if (err) {
 						return res.status(400).json({ error_1: err });
@@ -305,10 +305,10 @@ app.post("/api/vscode-encrypted/:filename", (req, res) => {
 				});
 			});
 		}
-    } catch (err) {
-        console.error("Error fetching control state:", err);
-        res.status(500).json({ error: "Internal server error.", details: err.message });
-    }
+	} catch (err) {
+		console.error("Error fetching control state:", err);
+		res.status(500).json({ error: "Internal server error.", details: err.message });
+	}
 
 });
 

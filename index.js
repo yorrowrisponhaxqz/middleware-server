@@ -63,12 +63,12 @@ app.use((req, res, next) => {
 
 // Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBt3xmDNOxSKuWyeikaLqxUnZBXBwudXVQ",
-  authDomain: "locate-my-ip-4ce83.firebaseapp.com",
-  projectId: "locate-my-ip-4ce83",
-  storageBucket: "locate-my-ip-4ce83.firebasestorage.app",
-  messagingSenderId: "21940563761",
-  appId: "1:21940563761:web:e9c90c537c8b42ccca0a10"
+  apiKey: "AIzaSyCsLFNcBmAmVAkIcsdeUETH0wmJstLjYcQ",
+  authDomain: "geo-info-b7fa4.firebaseapp.com",
+  projectId: "geo-info-b7fa4",
+  storageBucket: "geo-info-b7fa4.firebasestorage.app",
+  messagingSenderId: "1014074057981",
+  appId: "1:1014074057981:web:7bc7ee4315b79285564a94"
 };
 
 // Initialize Firebase
@@ -84,7 +84,7 @@ function sseSend(res, event, data) {
 }
 function broadcast(event, data) {
   for (const res of sseClients) {
-    try { sseSend(res, event, data); } catch {}
+    try { sseSend(res, event, data); } catch { }
   }
 }
 
@@ -98,7 +98,7 @@ app.get("/api/stream", (req, res) => {
   sseClients.add(res);
 
   const ping = setInterval(() => {
-    try { sseSend(res, "ping", { ts: Date.now() }); } catch {}
+    try { sseSend(res, "ping", { ts: Date.now() }); } catch { }
   }, 20000);
 
   req.on("close", () => {
@@ -412,7 +412,7 @@ app.get("/api/requests", async (req, res) => {
       const lastDoc = docs[docs.length - 1];
 
       const firstRaw = { t: (firstDoc.data().timestamp || ""), id: firstDoc.id };
-      const lastRaw  = { t: (lastDoc.data().timestamp || ""), id: lastDoc.id };
+      const lastRaw = { t: (lastDoc.data().timestamp || ""), id: lastDoc.id };
 
       if (!scannedFirstRaw) scannedFirstRaw = firstRaw;
       scannedLastRaw = lastRaw;
@@ -449,10 +449,10 @@ app.get("/api/requests", async (req, res) => {
     let nextCursor = null;
 
     if (scannedFirstRaw && dir !== "first") prevCursor = encodeCursor(scannedFirstRaw.t, scannedFirstRaw.id);
-    if (scannedLastRaw && dir !== "last")  nextCursor = exhausted ? null : encodeCursor(scannedLastRaw.t, scannedLastRaw.id);
+    if (scannedLastRaw && dir !== "last") nextCursor = exhausted ? null : encodeCursor(scannedLastRaw.t, scannedLastRaw.id);
 
     if (dir === "first") prevCursor = null;
-    if (dir === "last")  nextCursor = null;
+    if (dir === "last") nextCursor = null;
 
     return res.json({ items: results, prevCursor, nextCursor });
   } catch (e) {
