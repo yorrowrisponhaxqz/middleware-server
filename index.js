@@ -28,7 +28,6 @@ const {
   documentId,
 } = require("firebase/firestore");
 
-
 dotenv.config();
 const app = express();
 
